@@ -1,6 +1,6 @@
 #!/bin/sh
 date -u
-echo "updating home"
+echo "updating home.."
 pushd "${HOME}/redeclipse-master/home" 2>&1 >/dev/null
 git pull && killall -HUP redeclipse_server_linux && killall -HUP redeclipse_elara_linux
 popd 2>&1 >/dev/null
@@ -16,16 +16,17 @@ if [ ! -e "${HOME}/.runupdate" ]; then
   echo "update (have: ${RE_CURVER} want: ${RE_RUNVER})"
   if [ -n "${RE_RUNVER}" ] && [ "${RE_CURVER}" != "${RE_RUNVER}" ]; then
     date -u > "${HOME}/.runupdate"
-    if [ "${RE_INT}" = "true" ]; then
+    if [ "${RE_INT}" = "false" ]; then
       echo "restarting master.."
-      killall -TERM redeclipse_server_linux &
+      killall -TERM redeclipse_server_linux
     fi
+    echo "waiting for update.."
     while [ "${RE_CURVER}" != "${RE_RUNVER}" ]; do
       sleep 10
       RE_CURVER=`cat "${HOME}/redeclipse-master/bin/version.txt"`
     done
     echo "restarting elara.."
-    killall -TERM redeclipse_elara_linux &
+    killall -TERM redeclipse_elara_linux
     rm -f "${HOME}/.runupdate"
   fi
 else
