@@ -1,5 +1,5 @@
 #!/bin/sh
-date
+date -u
 echo "rotating logs"
 pushd "${HOME}/logs"
 for i in *.log; do

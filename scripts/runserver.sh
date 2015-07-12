@@ -1,5 +1,5 @@
 #!/bin/sh
-date
+date -u
 echo "running server: $1"
 case "$1" in
   master)

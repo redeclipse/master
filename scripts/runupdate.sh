@@ -1,5 +1,5 @@
 #!/bin/sh
-date
+date -u
 echo "updating home"
 pushd "${HOME}/redeclipse-master/home" 2>&1 >/dev/null
 git pull && killall -HUP redeclipse_server_linux && killall -HUP redeclipse_elara_linux

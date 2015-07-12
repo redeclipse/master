@@ -1,5 +1,5 @@
 #!/bin/sh
-date
+date -u
 echo "running screens"
 screen -S redeclipse -t 0 -A -d -m
 screen -S redeclipse -X screen -t 1
