@@ -10,7 +10,7 @@ RE_RUNVER=`cat /webspace/redeclipse.net/files/stable/bins.txt`
 
 RE_INT="false"
 echo "checking master server.."
-curl --fail --max-time 3 http://play.redeclipse.net:28800/version || (RE_INT="true"; killall -INT redeclipse_server_linux)
+curl --fail --max-time 3 http://play.redeclipse.net:28800/version || (RE_INT="true"; killall -KILL redeclipse_server_linux)
 
 if [ ! -e "${HOME}/.runupdate" ]; then
   echo "update (have: ${RE_CURVER} want: ${RE_RUNVER})"
