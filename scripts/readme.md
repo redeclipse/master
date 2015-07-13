@@ -39,5 +39,4 @@ Should you accidentally break out of the infinite loop, you can press `UP` to br
 * Window 1: `. "${HOME}/master/runserver.sh" elara`
 
 ## runupdate.sh
-This file is responsible for updating this repository on the server and telling the servers to reload their configuration. It also checks if the master server is responding, and kills (`SIGKILL`) if it doesn't. The script then goes on to check if there is a binary update to perform, then signals the *master* to terminate when the server is next empty (`SIGTERM`), and then goes on to wait for the server to restart and update before restarting the *elara* server.
-
+This file is responsible for updating this repository on the server and telling the servers to reload their configuration, then updates the web space (for [http://redeclipse.net](http://redeclipse.net)). It also checks if the master server is responding, and kills (`SIGKILL`) if it doesn't. The script then goes on to check if there is a binary update to perform, then signals the *master* to terminate when the server is next empty (`SIGTERM`), and then goes on to wait for the server to restart and update before restarting the *elara* server.

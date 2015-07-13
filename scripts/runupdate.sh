@@ -2,23 +2,28 @@
 date -u
 echo "updating home.."
 pushd "${HOME}/master" 2>&1 >/dev/null
-git pull
+git pull --rebase
 killall -HUP redeclipse_server_linux
 killall -HUP redeclipse_elara_linux
 popd 2>&1 >/dev/null
 
-RE_CURVER=`cat "${HOME}/redeclipse-master/bin/version.txt"`
-RE_RUNVER=`cat /webspace/redeclipse.net/files/stable/bins.txt`
+echo "updating web.."
+pushd "/webspace/redeclipse.net"
+git pull --rebase
+popd
 
-RE_INT="false"
+RE_CURVER=`cat "${HOME}/redeclipse-master/bin/version.txt"`
+RE_RUNVER=`cat "/webspace/redeclipse.net/files/stable/bins.txt"`
+RE_DOKILL="false"
+
 echo "checking master server.."
-curl --fail --max-time 3 http://play.redeclipse.net:28800/version || (RE_INT="true"; killall -KILL redeclipse_server_linux)
+curl --fail --max-time 3 http://play.redeclipse.net:28800/version || (RE_DOKILL="true"; killall -KILL redeclipse_server_linux)
 
 if [ ! -e "${HOME}/.runupdate" ]; then
   echo "checking update: ${RE_CURVER} -> ${RE_RUNVER})"
   if [ -n "${RE_RUNVER}" ] && [ "${RE_CURVER}" != "${RE_RUNVER}" ]; then
     date -u > "${HOME}/.runupdate"
-    if [ "${RE_INT}" = "false" ]; then
+    if [ "${RE_DOKILL}" != "true" ]; then
       echo "restarting master.."
       killall -TERM redeclipse_server_linux
     fi
