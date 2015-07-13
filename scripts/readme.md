@@ -9,9 +9,9 @@ The server is set up to mostly maintain itself. It does this with the use of **c
 The crontab basically looks like this:
 ```
 # m h  dom mon dow   command
-@reboot (/bin/sh --login "${HOME}/redeclipse-master/home/scripts/runscreen.sh" 2>&1 | tee --append "${HOME}/logs/screen.log" &)
-0,10,20,30,40,50 * * * * (/bin/sh --login "${HOME}/redeclipse-master/home/scripts/runupdate.sh" 2>&1 | tee --append "${HOME}/logs/update.log" &)
-0,30 * * * * (/bin/sh --login "${HOME}/redeclipse-master/home/scripts/runrotate.sh" 2>&1 | tee --append "${HOME}/logs/rotate.log" &)
+@reboot (/bin/sh --login "${HOME}/master/scripts/runscreen.sh" 2>&1 | tee --append "${HOME}/logs/screen.log" &)
+0,10,20,30,40,50 * * * * (/bin/sh --login "${HOME}/master/scripts/runupdate.sh" 2>&1 | tee --append "${HOME}/logs/update.log" &)
+0,30 * * * * (/bin/sh --login "${HOME}/master/scripts/runrotate.sh" 2>&1 | tee --append "${HOME}/logs/rotate.log" &)
 # For more information see the manual pages of crontab(5) and cron(8)
 ```
 

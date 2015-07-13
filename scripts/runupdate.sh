@@ -1,8 +1,10 @@
 #!/bin/sh
 date -u
 echo "updating home.."
-pushd "${HOME}/redeclipse-master/home" 2>&1 >/dev/null
-git pull && killall -HUP redeclipse_server_linux && killall -HUP redeclipse_elara_linux
+pushd "${HOME}/master" 2>&1 >/dev/null
+git pull
+killall -HUP redeclipse_server_linux
+killall -HUP redeclipse_elara_linux
 popd 2>&1 >/dev/null
 
 RE_CURVER=`cat "${HOME}/redeclipse-master/bin/version.txt"`
@@ -13,7 +15,7 @@ echo "checking master server.."
 curl --fail --max-time 3 http://play.redeclipse.net:28800/version || (RE_INT="true"; killall -KILL redeclipse_server_linux)
 
 if [ ! -e "${HOME}/.runupdate" ]; then
-  echo "update (have: ${RE_CURVER} want: ${RE_RUNVER})"
+  echo "checking update: ${RE_CURVER} -> ${RE_RUNVER})"
   if [ -n "${RE_RUNVER}" ] && [ "${RE_CURVER}" != "${RE_RUNVER}" ]; then
     date -u > "${HOME}/.runupdate"
     if [ "${RE_INT}" = "false" ]; then
