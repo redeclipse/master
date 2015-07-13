@@ -35,8 +35,8 @@ Physical access to these sessions is obtained by typing `screen -r` when logged 
 This file is responsible for starting each server, and maintaining it in an infinite loop (`while [ 0 != 1]`) so that it can be interrupted and automatically restarted (automatic updates, unexpected crashes, etc). This is the script running in each of the two screen windows.
 
 Should you accidentally break out of the infinite loop, you can press `UP` to bring up the last command and press `ENTER` to re-execute it. Failing that, use this command in each window:
-* Window 0: `. "${HOME}/runserver.sh" master`
-* Window 1: `. "${HOME}/runserver.sh" elara`
+* Window 0: `. "${HOME}/master/runserver.sh" master`
+* Window 1: `. "${HOME}/master/runserver.sh" elara`
 
 ## runupdate.sh
 This file is responsible for updating this repository on the server and telling the servers to reload their configuration. It also checks if the master server is responding, and kills (`SIGKILL`) if it doesn't. The script then goes on to check if there is a binary update to perform, then signals the *master* to terminate when the server is next empty (`SIGTERM`), and then goes on to wait for the server to restart and update before restarting the *elara* server.
