@@ -1,1 +1,17 @@
 master/auth.cfg
+*.sqlite
+*.sql
+*.bak
+out
+*~
+.directory
+.DS_Store
+*.orig
+*.rej
+*.bak
+*.kate-swp
+*.core
+*.diff
+*.patch
+*.out
+
