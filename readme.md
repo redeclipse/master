@@ -4,7 +4,7 @@ Trusted moderators, administrators, and developers are given access to this repo
 ##Managing
 You can access this repository by doing a checkout. If you don't want to do a git checkout of the repository, you can edit the files using the GitHub visual editor and commit directly to the repository from there. Please try to add a descriptive commit message in order to better communicate with your fellow moderators.
 
-There are currently two servers which are run at the moment, *master* and *elara*. They each have a directory in this repository for their home folder, which contains their respective `servinit.cfg`. In general, you shouldn't need to change anything other than `master/iplist.cfg`, which contains the global trusts, bans, etc lists.
+There are currently two servers which are run at the moment, *master* and *stable*. They each have a directory in this repository for their home folder, which contains their respective `servinit.cfg`. In general, you shouldn't need to change anything other than `master/iplist.cfg`, which contains the global trusts, bans, etc lists.
 
 ##Bans
 Global bans should only be used when a player persistently violations the Multiplayer Guidelines and continues to be a nuisance despite temporary bans that get placed. *Global bans are a last resort*. At the end of bans, there are comments showing the date the ban was added; you should maintain this for your own bans too. It is encouraged to clear global bans after an acceptable time has passed, depending on the severity of the offence. No ban should exceed three months unless the problem perists.
@@ -14,8 +14,6 @@ In order to limit excessive server proliferation, the master server limits the n
 
 ##Update cycle
 The server runs the update sequence every ten minutes (X:00, X:10, X:20 .. X:50), at which point the master server will reload the configuration and pass the updated information to all connected servers. The cycle will continue by comparing the current binary hash to that of the current stable build and signal the server to terminate if it has changed.
-
-In order to allow the *elara* server to work out of the same directory, it copies the binary to an intermediate location before it runs, and isn't signalled to terminate until the *master* has successfully restarted and updated. If this gets stuck someone with SSH access might need to delete `~/.runupdate`.
 
 ##Scripts
 There's a separate readme in the scripts directory on the voodoo conducted by the scripts which are called by cron.

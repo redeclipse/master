@@ -27,7 +27,7 @@ This file is responsible for starting the initial screen session, and loading th
 
 There are two main windows opened by this file:
 * `runserver.sh master` starts the master server; and
-* `runserver.sh elara` starts the elara server
+* `runserver.sh stable` starts the stable server
 
 Physical access to these sessions is obtained by typing `screen -r` when logged in via ssh. While using screen press `CTRL+A` then `0` for window zero (0), or `1` for window one (1). Press `CTRL+C` in a window to interrupt the server, it will automatically restart.
 
@@ -36,7 +36,7 @@ This file is responsible for starting each server, and maintaining it in an infi
 
 Should you accidentally break out of the infinite loop, you can press `UP` to bring up the last command and press `ENTER` to re-execute it. Failing that, use this command in each window:
 * Window 0: `. "${HOME}/master/runserver.sh" master`
-* Window 1: `. "${HOME}/master/runserver.sh" elara`
+* Window 1: `. "${HOME}/master/runserver.sh" stable`
 
 ## runupdate.sh
-This file is responsible for updating this repository on the server and telling the servers to reload their configuration, then updates the web space (for [http://redeclipse.net](http://redeclipse.net)). It also checks if the master server is responding, and kills (`SIGKILL`) if it doesn't. The script then goes on to check if there is a binary update to perform, then signals the *master* to terminate when the server is next empty (`SIGTERM`), and then goes on to wait for the server to restart and update before restarting the *elara* server.
+This file is responsible for updating this repository on the server and telling the servers to reload their configuration, then updates the web space (for [http://redeclipse.net](http://redeclipse.net)). It also checks if the master server is responding, and kills (`SIGKILL`) if it doesn't. The script then goes on to check if there is a binary update to perform, then signals to terminate when the server is next empty (`SIGTERM`).
