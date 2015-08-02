@@ -22,7 +22,7 @@ while [ "${RE_CURVER}" != "${RE_RUNVER}" ]; do
   RE_CURVER=`cat "${HOME}/redeclipse-master/bin/version.txt"`
 done
 
-echo "opening elara screen.."
-screen -S redeclipse -p 1 -X stuff $'. "${HOME}/master/scripts/runserver.sh" elara\n'
+echo "opening stable screen.."
+screen -S redeclipse -p 1 -X stuff $'. "${HOME}/master/scripts/runserver.sh" stable\n'
 
 echo "done."

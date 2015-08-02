@@ -2,26 +2,19 @@
 date -u
 echo "running server: $1"
 case "$1" in
-  master)
-    pushd "${HOME}/redeclipse-master"
+  master|stable)
+    pushd "${HOME}/redeclipse-${1}"
     while [ 0 != 1 ]; do
-      REDECLIPSE_BRANCH=stable REDECLIPSE_HOME="${HOME}/master/master" REDECLIPSE_BINARY=redeclipse_server ./redeclipse.sh -sg0 -g 2>&1 | tee --append "${HOME}/logs/master.log"
-      sleep 10
-    done
-    popd
-    ;;
-  elara)
-    pushd "${HOME}/redeclipse-master"
-    while [ 0 != 1 ]; do
-      cp -v bin/amd64/redeclipse_server_linux bin/amd64/redeclipse_elara_linux
-      REDECLIPSE_BRANCH=inplace REDECLIPSE_HOME="${HOME}/master/elara" REDECLIPSE_BINARY=redeclipse_elara ./redeclipse.sh -sg0 -g 2>&1 | tee --append "${HOME}/logs/elara.log"
+      REDECLIPSE_BRANCH=${1} REDECLIPSE_HOME="${HOME}/master/${1}" REDECLIPSE_BINARY=redeclipse_server ./redeclipse.sh -sg0 -g 2>&1 | tee --append "${HOME}/logs/server-${1}.log"
       sleep 10
     done
     popd
     ;;
   rehash)
-    killall -HUP redeclipse_server_linux
-    killall -HUP redeclipse_elara_linux
+    for i in master stable; do
+        j=`ps ax | grep "redeclipse-${i}" | grep -v "grep redeclipse-${i}" | sed -e 's/^[ \t]*//g;s/[ \t].*$//'`
+        if [ -n "${j}" ]; then kill -HUP ${j}; fi
+    done
     ;;
 esac
 echo "done."
