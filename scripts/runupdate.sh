@@ -19,12 +19,12 @@ if [ "${RE_DOKILL}" != "true" ]; then
     RE_CURVER=`cat "${HOME}/redeclipse-${i}/bin/version.txt"`
     RE_RUNVER=`cat "/webspace/redeclipse.net/files/${i}/bins.txt"`
     echo "checking ${i}: ${RE_CURVER} -> ${RE_RUNVER}"
-    RE_SIGNAL=-HUP
+    RE_SIGNAL=HUP
     RE_PID=`ps ax | grep "redeclipse-${i}" | grep -v "grep redeclipse-${i}" | sed -e 's/^[ \t]*//g;s/[ \t].*$//'`
     if [ -n "${RE_RUNVER}" ] && [ "${RE_CURVER}" != "${RE_RUNVER}" ]; then
       RE_SIGNAL=TERM
     fi
-    kill -${RE_SIGNAL} ${RE_PID}
+    kill -s ${RE_SIGNAL} ${RE_PID}
   done
 fi
 echo "done."

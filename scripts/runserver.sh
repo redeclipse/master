@@ -13,7 +13,7 @@ case "$1" in
   rehash)
     for i in master stable; do
         j=`ps ax | grep "redeclipse-${i}" | grep -v "grep redeclipse-${i}" | sed -e 's/^[ \t]*//g;s/[ \t].*$//'`
-        if [ -n "${j}" ]; then kill -HUP ${j}; fi
+        if [ -n "${j}" ]; then kill -s HUP ${j}; fi
     done
     ;;
 esac
