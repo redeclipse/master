@@ -23,6 +23,6 @@ echo "opening stable screen.."
 screen -S redeclipse -p 1 -X stuff $'. "${HOME}/master/scripts/runserver.sh" stable\n'
 
 echo "opening statsdb screen.."
-screen -S redeclipse -p 1 -X stuff $'. "${HOME}/master/scripts/runserver.sh" statsdb\n'
+screen -S redeclipse -p 2 -X stuff $'. "${HOME}/master/scripts/runserver.sh" statsdb\n'
 
 echo "-"
