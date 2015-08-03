@@ -13,7 +13,7 @@ case "$1" in
   statsdb)
     pushd "${HOME}/statsdb-interface"
     while true; do
-      ./server.py "${HOME}/master/master" | tee --append "${HOME}/logs/server-statsdb.log"
+      PYTHONUNBUFFERED="yes" ./server.py "${HOME}/master/master" | tee --append "${HOME}/logs/server-statsdb.log"
       sleep 10
     done
     popd
