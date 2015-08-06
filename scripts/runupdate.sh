@@ -1,12 +1,12 @@
 #!/bin/sh
 date -u
 
-echo "site: checking"
+echo "site: checking.."
 pushd "/webspace/redeclipse.net" 2>&1 >/dev/null
 git pull --rebase
 popd 2>&1 >/dev/null
 
-echo "home: checking"
+echo "home: checking.."
 pushd "${HOME}/master" 2>&1 >/dev/null
 RE_CUR_HOME=`git rev-parse HEAD`
 git pull --rebase
@@ -23,7 +23,7 @@ if [ -n "${RE_RUN_HOME}" ] && [ "${RE_CUR_HOME}" != "${RE_RUN_HOME}" ]; then
   done
 fi
 
-echo "statsdb: checking"
+echo "statsdb: checking.."
 pushd "${HOME}/statsdb-interface" 2>&1 >/dev/null
 RE_CUR_STATS=`git rev-parse HEAD`
 git pull --rebase
@@ -39,9 +39,9 @@ if [ -n "${RE_RUN_STATS}" ] && [ "${RE_CUR_STATS}" != "${RE_RUN_STATS}" ]; then
 fi
 
 echo "checking master server.."
-if curl --progress-bar --fail --max-time 10 http://play.redeclipse.net:28800/version; then
+if curl --silent --location --insecure --fail --max-time 10 http://play.redeclipse.net:28800/version; then
   for i in master stable; do
-    echo "${i}: checking"
+    echo "${i}: checking.."
     RE_CUR_VER=`cat "${HOME}/redeclipse-${i}/bin/version.txt"`
     RE_RUN_VER=`cat "/webspace/redeclipse.net/files/${i}/bins.txt"`
     echo "${i}: ${RE_CUR_VER} -> ${RE_RUN_VER}"
@@ -54,7 +54,7 @@ if curl --progress-bar --fail --max-time 10 http://play.redeclipse.net:28800/ver
     fi
   done
 else
-  echo "master server not responding, killing all servers"
+  echo "master server not responding, killing all servers!"
   killall -KILL redeclipse_server_linux
 fi
 
