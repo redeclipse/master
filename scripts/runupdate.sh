@@ -15,7 +15,7 @@ popd 2>&1 >/dev/null
 if [ -n "${RE_RUN_HOME}" ] && [ "${RE_CUR_HOME}" != "${RE_RUN_HOME}" ]; then
   echo "home: ${RE_CUR_HOME} -> ${RE_RUN_HOME}"
   for i in master stable; do
-    RE_PID=`ps ax | grep "redeclipse-${i}" | grep -v "grep" | sed -e 's/^[ \t]*//g;s/[ \t].*$//'`
+    RE_PID=`pgrep -f "redeclipse-${i}"`
     if [ -n "${RE_PID}" ]; then
       echo "sending HUP to ${i} (${RE_PID})"
       kill -s HUP ${RE_PID}
@@ -31,7 +31,7 @@ RE_RUN_STATS=`git rev-parse HEAD`
 popd 2>&1 >/dev/null
 if [ -n "${RE_RUN_STATS}" ] && [ "${RE_CUR_STATS}" != "${RE_RUN_STATS}" ]; then
   echo "statsdb: ${RE_CUR_STATS} -> ${RE_RUN_STATS}"
-  RE_PID=`ps ax | grep "server.py ${HOME}/master/master" | grep -v "grep" | sed -e 's/^[ \t]*//g;s/[ \t].*$//'`
+  RE_PID=`pgrep -f "server.py ${HOME}/master/master"`
   if [ -n "${RE_PID}" ]; then
     echo "statsdb: sending TERM to ${RE_PID}"
     kill -s TERM ${RE_PID}
@@ -46,7 +46,7 @@ if curl --progress-bar --fail --max-time 10 http://play.redeclipse.net:28800/ver
     RE_RUN_VER=`cat "/webspace/redeclipse.net/files/${i}/bins.txt"`
     if [ -n "${RE_RUN_VER}" ] && [ "${RE_CUR_VER}" != "${RE_RUN_VER}" ]; then
       echo "${i}: ${RE_CUR_VER} -> ${RE_RUN_VER}"
-      RE_PID=`ps ax | grep "redeclipse-${i}" | grep -v "grep" | sed -e 's/^[ \t]*//g;s/[ \t].*$//'`
+      RE_PID=`pgrep "redeclipse-${i}"`
       if [ -n "${RE_PID}" ]; then
         echo "${i}: sending TERM to ${RE_PID}"
         kill -s TERM ${RE_PID}
