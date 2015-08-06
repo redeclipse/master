@@ -20,7 +20,7 @@ case "$1" in
     ;;
   rehash)
     for i in master stable; do
-        j=`pgrep "redeclipse-${i}"`
+        j=`pgrep -f "redeclipse-${i}"`
         if [ -n "${j}" ]; then kill -s HUP ${j}; fi
     done
     ;;
