@@ -10,6 +10,14 @@ case "$1" in
     done
     popd
     ;;
+  master-nonet|stable-nonet)
+    pushd "${HOME}/redeclipse-${1}"
+    while true; do
+      REDECLIPSE_BRANCH=inplace REDECLIPSE_HOME="${HOME}/master/${1}" REDECLIPSE_BINARY=redeclipse_server ./redeclipse.sh -sg0 -g 2>&1 | tee --append "${HOME}/logs/server-${1}.log"
+      sleep 10
+    done
+    popd
+    ;;
   statsdb)
     pushd "${HOME}/statsdb-interface"
     while true; do
