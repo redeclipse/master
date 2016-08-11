@@ -1,4 +1,4 @@
-master/auth.cfg
+*/auth.cfg
 *.sqlite
 *.sql
 *.bak
