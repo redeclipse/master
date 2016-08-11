@@ -19,12 +19,12 @@ case "$1" in
     popd
     ;;
   statsdb)
-    pushd "${HOME}/statsdb-interface"
-    while true; do
-      PYTHONUNBUFFERED="yes" ./server.py "${HOME}/master/master" | tee --append "${HOME}/logs/server-statsdb.log"
-      sleep 10
-    done
-    popd
+    #pushd "${HOME}/statsdb-interface"
+    #while true; do
+    #  PYTHONUNBUFFERED="yes" ./server.py "${HOME}/master/master" | tee --append "${HOME}/logs/server-statsdb.log"
+    #  sleep 10
+    #done
+    #popd
     ;;
   rehash)
     for i in master stable; do
