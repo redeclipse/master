@@ -1,5 +1,6 @@
 #!/bin/sh
 date -u
+RE_RUN_SERVERS="master"
 
 echo "site: checking.."
 pushd "/webspace/redeclipse.net" 2>&1 >/dev/null
@@ -14,7 +15,7 @@ RE_RUN_HOME=`git rev-parse HEAD`
 popd 2>&1 >/dev/null
 echo "home: ${RE_CUR_HOME} -> ${RE_RUN_HOME}"
 if [ -n "${RE_RUN_HOME}" ] && [ "${RE_CUR_HOME}" != "${RE_RUN_HOME}" ]; then
-  for i in master stable; do
+  for i in ${RE_RUN_SERVERS}; do
     RE_PID=`pgrep -f "redeclipse-${i}"`
     if [ -n "${RE_PID}" ]; then
       echo "sending HUP to ${i} (${RE_PID})"
@@ -31,7 +32,7 @@ RE_RUN_STATS=`git rev-parse HEAD`
 popd 2>&1 >/dev/null
 echo "statsdb: ${RE_CUR_STATS} -> ${RE_RUN_STATS}"
 if [ -n "${RE_RUN_STATS}" ] && [ "${RE_CUR_STATS}" != "${RE_RUN_STATS}" ]; then
-  RE_PID=`pgrep -f "server.py ${HOME}/master/master"`
+  RE_PID=`pgrep -f "run.py ${HOME}/master/master"`
   if [ -n "${RE_PID}" ]; then
     echo "statsdb: sending TERM to ${RE_PID}"
     kill -s TERM ${RE_PID}
@@ -40,7 +41,7 @@ fi
 
 echo "checking master server.."
 if curl --silent --location --insecure --fail --max-time 10 http://play.redeclipse.net:28800/version; then
-  for i in master stable; do
+  for i in ${RE_RUN_SERVERS}; do
     echo "${i}: checking.."
     RE_CUR_VER=`cat "${HOME}/redeclipse-${i}/bin/version.txt"`
     RE_RUN_VER=`cat "/webspace/redeclipse.net/files/${i}/bins.txt"`
