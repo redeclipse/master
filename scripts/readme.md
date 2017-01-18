@@ -25,9 +25,8 @@ Comments start with `#`, other lines tell cron what to do and when:
 ## runscreen.sh
 This file is responsible for starting the initial screen session, and loading the servers as windows inside that session.
 
-There are two main windows opened by this file:
-* `runserver.sh master` starts the master server; and
-* `runserver.sh stable` starts the stable server
+There is one main window opened by this file:
+* `runserver.sh official` starts the official server
 
 Physical access to these sessions is obtained by typing `screen -r` when logged in via ssh. While using screen press `CTRL+A` then `0` for window zero (0), or `1` for window one (1). Press `CTRL+C` in a window to interrupt the server, it will automatically restart.
 
@@ -35,8 +34,7 @@ Physical access to these sessions is obtained by typing `screen -r` when logged 
 This file is responsible for starting each server, and maintaining it in an infinite loop (`while [ 0 != 1]`) so that it can be interrupted and automatically restarted (automatic updates, unexpected crashes, etc). This is the script running in each of the two screen windows.
 
 Should you accidentally break out of the infinite loop, you can press `UP` to bring up the last command and press `ENTER` to re-execute it. Failing that, use this command in each window:
-* Window 0: `. "${HOME}/master/runserver.sh" master`
-* Window 1: `. "${HOME}/master/runserver.sh" stable`
+* Window 0: `. "${HOME}/official/runserver.sh" official`
 
 ## runupdate.sh
-This file is responsible for updating this repository on the server and telling the servers to reload their configuration, then updates the web space (for [http://redeclipse.net](http://redeclipse.net)). It also checks if the master server is responding, and kills (`SIGKILL`) if it doesn't. The script then goes on to check if there is a binary update to perform, then signals to terminate when the server is next empty (`SIGTERM`).
+This file is responsible for updating this repository on the server and telling the servers to reload their configuration, then updates the web space (for [http://redeclipse.net](http://redeclipse.net)). It also checks if the server is responding, and kills (`SIGKILL`) if it doesn't. The script then goes on to check if there is a binary update to perform, then signals to terminate when the server is next empty (`SIGTERM`).

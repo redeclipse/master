@@ -1,6 +1,6 @@
 #!/bin/sh
 date -u
-RE_RUN_SERVERS="master"
+RE_RUN_SERVERS="official"
 
 echo "site: checking.."
 pushd "/webspace/redeclipse.net" 2>&1 >/dev/null
@@ -32,14 +32,14 @@ RE_RUN_STATS=`git rev-parse HEAD`
 popd 2>&1 >/dev/null
 echo "statsdb: ${RE_CUR_STATS} -> ${RE_RUN_STATS}"
 if [ -n "${RE_RUN_STATS}" ] && [ "${RE_CUR_STATS}" != "${RE_RUN_STATS}" ]; then
-  RE_PID=`pgrep -f "run.py ${HOME}/master/master"`
+  RE_PID=`pgrep -f "run.py ${HOME}/master/official"`
   if [ -n "${RE_PID}" ]; then
     echo "statsdb: sending TERM to ${RE_PID}"
     kill -s TERM ${RE_PID}
   fi
 fi
 
-echo "checking master server.."
+echo "checking servers.."
 if curl --silent --location --insecure --fail --max-time 10 http://play.redeclipse.net:28800/version; then
   for i in ${RE_RUN_SERVERS}; do
     echo "${i}: checking.."
