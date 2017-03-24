@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 date -u
 
 echo "updating home.."

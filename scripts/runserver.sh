@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 date -u
 echo "running server: $1"
 case "$1" in

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 date -u
 RE_RUN_SERVERS="official"
 

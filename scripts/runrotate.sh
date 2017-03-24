@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 date -u
 echo "rotating logs"
 pushd "${HOME}/logs"
