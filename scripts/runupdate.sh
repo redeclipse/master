@@ -1,18 +1,16 @@
-#!/bin/bash
+#!/bin/sh
 date -u
 RE_RUN_SERVERS="official"
 
 echo "site: checking.."
-pushd "/webspace/redeclipse.net" 2>&1 >/dev/null
+cd "/webspace/redeclipse.net" 2>&1 >/dev/null
 git pull --rebase
-popd 2>&1 >/dev/null
 
 echo "home: checking.."
-pushd "${HOME}/master" 2>&1 >/dev/null
+cd "${HOME}/master" 2>&1 >/dev/null
 RE_CUR_HOME=`git rev-parse HEAD`
 git pull --rebase
 RE_RUN_HOME=`git rev-parse HEAD`
-popd 2>&1 >/dev/null
 echo "home: ${RE_CUR_HOME} -> ${RE_RUN_HOME}"
 if [ -n "${RE_RUN_HOME}" ] && [ "${RE_CUR_HOME}" != "${RE_RUN_HOME}" ]; then
   for i in ${RE_RUN_SERVERS}; do
@@ -25,11 +23,10 @@ if [ -n "${RE_RUN_HOME}" ] && [ "${RE_CUR_HOME}" != "${RE_RUN_HOME}" ]; then
 fi
 
 echo "statsdb: checking.."
-pushd "${HOME}/statsdb-interface" 2>&1 >/dev/null
+cd "${HOME}/statsdb-interface" 2>&1 >/dev/null
 RE_CUR_STATS=`git rev-parse HEAD`
 git pull --rebase
 RE_RUN_STATS=`git rev-parse HEAD`
-popd 2>&1 >/dev/null
 echo "statsdb: ${RE_CUR_STATS} -> ${RE_RUN_STATS}"
 if [ -n "${RE_RUN_STATS}" ] && [ "${RE_CUR_STATS}" != "${RE_RUN_STATS}" ]; then
   RE_PID=`pgrep -f "run.py ${HOME}/master/official"`
@@ -39,6 +36,7 @@ if [ -n "${RE_RUN_STATS}" ] && [ "${RE_CUR_STATS}" != "${RE_RUN_STATS}" ]; then
   fi
 fi
 
+cd "${HOME}" 2>&1 >/dev/null
 echo "checking servers.."
 if curl --silent --location --insecure --fail --max-time 10 http://play.redeclipse.net:28800/version; then
   for i in ${RE_RUN_SERVERS}; do

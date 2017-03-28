@@ -1,16 +1,15 @@
-#!/bin/bash
+#!/bin/sh
 date -u
 
 echo "updating home.."
-pushd "${HOME}/master" 2>&1 >/dev/null
+cd "${HOME}/master" 2>&1 >/dev/null
 git pull --rebase
-popd 2>&1 >/dev/null
 
 echo "updating statsdb.."
-pushd "${HOME}/statsdb-interface" 2>&1 >/dev/null
+cd "${HOME}/statsdb-interface" 2>&1 >/dev/null
 git pull --rebase
-popd 2>&1 >/dev/null
 
+cd "${HOME}" 2>&1 >/dev/null
 echo "running screens.."
 screen -S redeclipse -t 0 -A -d -m
 screen -S redeclipse -X screen -t 1
