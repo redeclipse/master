@@ -24,16 +24,10 @@ fi
 
 echo "statsdb: checking.."
 cd "${HOME}/statsdb-interface" 2>&1 >/dev/null
-RE_CUR_STATS=`git rev-parse HEAD`
-git pull --rebase
-RE_RUN_STATS=`git rev-parse HEAD`
-echo "statsdb: ${RE_CUR_STATS} -> ${RE_RUN_STATS}"
-if [ -n "${RE_RUN_STATS}" ] && [ "${RE_CUR_STATS}" != "${RE_RUN_STATS}" ]; then
-  RE_PID=`pgrep -f "run.py ${HOME}/master/official"`
-  if [ -n "${RE_PID}" ]; then
-    echo "statsdb: sending TERM to ${RE_PID}"
-    kill -s TERM ${RE_PID}
-  fi
+RE_PID=`pgrep -f "run.py ${HOME}/master/official"`
+if [ -n "${RE_PID}" ]; then
+echo "statsdb: sending TERM to ${RE_PID}"
+kill -s TERM ${RE_PID}
 fi
 
 cd "${HOME}" 2>&1 >/dev/null
