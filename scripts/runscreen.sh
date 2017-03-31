@@ -16,9 +16,9 @@ screen -S redeclipse -X screen -t 1
 # screen -S redeclipse -X screen -t 2
 
 echo "opening official server screen.."
-screen -S redeclipse -p 0 -X stuff '. "${HOME}/master/scripts/runserver.sh" official\n'
+screen -S redeclipse -p 0 -X stuff '/bin/sh -l "${HOME}/master/scripts/runserver.sh" official\n'
 
 echo "opening statistics database screen.."
-screen -S redeclipse -p 1 -X stuff '. "${HOME}/master/scripts/runserver.sh" statsdb\n'
+screen -S redeclipse -p 1 -X stuff '/bin/sh -l "${HOME}/master/scripts/runserver.sh" statsdb\n'
 
 echo "-"
