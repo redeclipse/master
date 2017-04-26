@@ -24,10 +24,11 @@ fi
 
 echo "statsdb: checking.."
 cd "${HOME}/statsdb-interface" 2>&1 >/dev/null
+git pull --rebase
 RE_PID=`pgrep -f "run.py ${HOME}/master/official"`
 if [ -n "${RE_PID}" ]; then
-echo "statsdb: sending TERM to ${RE_PID}"
-kill -s TERM ${RE_PID}
+    echo "statsdb: sending TERM to ${RE_PID}"
+    kill -s TERM ${RE_PID}
 fi
 
 cd "${HOME}" 2>&1 >/dev/null
