@@ -1,6 +1,7 @@
 #!/bin/sh
 date -u
 RE_RUN_SERVERS="official"
+RE_RUN_CURHOUR=`date "+%M"`
 
 echo "site: checking.."
 cd "/webspace/redeclipse.net" 2>&1 >/dev/null
@@ -12,7 +13,7 @@ RE_CUR_HOME=`git rev-parse HEAD`
 git pull --rebase
 RE_RUN_HOME=`git rev-parse HEAD`
 echo "home: ${RE_CUR_HOME} -> ${RE_RUN_HOME}"
-if [ -n "${RE_RUN_HOME}" ] && [ "${RE_CUR_HOME}" != "${RE_RUN_HOME}" ]; then
+if [ "${RE_CUR_HOME}" != "${RE_RUN_HOME}" ]; then
   for i in ${RE_RUN_SERVERS}; do
     RE_PID=`pgrep -f "redeclipse-${i}"`
     if [ -n "${RE_PID}" ]; then
@@ -24,11 +25,16 @@ fi
 
 echo "statsdb: checking.."
 cd "${HOME}/statsdb-interface" 2>&1 >/dev/null
+RE_CUR_HOME=`git rev-parse HEAD`
 git pull --rebase
-RE_PID=`pgrep -f "run.py ${HOME}/master/official"`
-if [ -n "${RE_PID}" ]; then
-    echo "statsdb: sending TERM to ${RE_PID}"
-    kill -s TERM ${RE_PID}
+RE_RUN_HOME=`git rev-parse HEAD`
+echo "statsdb: ${RE_CUR_HOME} -> ${RE_RUN_HOME}"
+if [ "${RE_RUN_CURHOUR}" -eq "0" ] || [ "${RE_CUR_HOME}" != "${RE_RUN_HOME}" ]; then
+    RE_PID=`pgrep -f "run.py ${HOME}/master/official"`
+    if [ -n "${RE_PID}" ]; then
+        echo "statsdb: sending TERM to ${RE_PID}"
+        kill -s TERM ${RE_PID}
+    fi
 fi
 
 cd "${HOME}" 2>&1 >/dev/null
