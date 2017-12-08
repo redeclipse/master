@@ -7,7 +7,7 @@ You can access this repository by doing a checkout. If you don't want to do a gi
 There is currently one server run at the moment, *official*. Servers each have a directory in this repository for their home folder, which contains their respective `servinit.cfg`. In general, you shouldn't need to change anything other than `official/iplist.cfg`, which contains the global trusts, bans, etc lists.
 
 ## Bans
-Global bans should only be used when a player persistently violations the Multiplayer Guidelines and continues to be a nuisance despite temporary bans that get placed. *Global bans are a last resort*. At the end of bans, there are comments showing the date the ban was added; you should maintain this for your own bans too. It is encouraged to clear global bans after an acceptable time has passed, depending on the severity of the offence. No ban should exceed three months unless the problem perists.
+Global bans should only be used when a player persistently violates the Multiplayer Guidelines and continues to be a nuisance despite temporary bans that get placed. *Global bans are a last resort*. At the end of bans, there are comments showing the date the ban was added; you should maintain this for your own bans too. It is encouraged to clear global bans after an acceptable time has passed, depending on the severity of the offence. No ban should exceed three months unless the problem perists.
 
 ## Trusts
 In order to limit excessive server proliferation, the master server limits the number of connections from a single host. Adding a trust allows a host to have as many concurrent sessions as they want. These should only be added if the hoster is a known/trusted community member and has a very good reason for needing more than the assigned limit.
