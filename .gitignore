@@ -1,8 +1,8 @@
 */auth.cfg
+*/authserv.cfg
 *.sqlite
 *.sql
 *.bak
-out
 *~
 .directory
 .DS_Store
@@ -10,8 +10,3 @@ out
 *.rej
 *.bak
 *.kate-swp
-*.core
-*.diff
-*.patch
-*.out
-
