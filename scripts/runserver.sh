@@ -16,6 +16,13 @@ case "$1" in
       sleep 10
     done
     ;;
+  master|dev)
+    cd "${HOME}/redeclipse-${1}"
+    while true; do
+      REDECLIPSE_BRANCH=master REDECLIPSE_HOME="${HOME}/master/${1}" REDECLIPSE_BINARY=redeclipse_server ./redeclipse.sh -sg0 -g 2>&1 | tee --append "${HOME}/logs/server-${1}.log"
+      sleep 10
+    done
+    ;;
   statsdb)
     cd "${HOME}/statsdb-interface"
     while true; do

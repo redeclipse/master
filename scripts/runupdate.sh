@@ -23,19 +23,19 @@ if [ "${RE_CUR_HOME}" != "${RE_RUN_HOME}" ]; then
   done
 fi
 
-echo "statsdb: checking.."
-cd "${HOME}/statsdb-interface" 2>&1 >/dev/null
-RE_CUR_HOME=`git rev-parse HEAD`
-git pull --rebase
-RE_RUN_HOME=`git rev-parse HEAD`
-echo "statsdb: ${RE_CUR_HOME} -> ${RE_RUN_HOME}"
-if [ "${RE_RUN_CURHOUR}" -eq "0" ] || [ "${RE_CUR_HOME}" != "${RE_RUN_HOME}" ]; then
-    RE_PID=`pgrep -f "run.py ${HOME}/master/official"`
-    if [ -n "${RE_PID}" ]; then
-        echo "statsdb: sending TERM to ${RE_PID}"
-        kill -s TERM ${RE_PID}
-    fi
-fi
+#echo "statsdb: checking.."
+#cd "${HOME}/statsdb-interface" 2>&1 >/dev/null
+#RE_CUR_HOME=`git rev-parse HEAD`
+#git pull --rebase
+#RE_RUN_HOME=`git rev-parse HEAD`
+#echo "statsdb: ${RE_CUR_HOME} -> ${RE_RUN_HOME}"
+#if [ "${RE_RUN_CURHOUR}" -eq "0" ] || [ "${RE_CUR_HOME}" != "${RE_RUN_HOME}" ]; then
+#    RE_PID=`pgrep -f "run.py ${HOME}/master/official"`
+#    if [ -n "${RE_PID}" ]; then
+#        echo "statsdb: sending TERM to ${RE_PID}"
+#        kill -s TERM ${RE_PID}
+#    fi
+#fi
 
 cd "${HOME}" 2>&1 >/dev/null
 echo "checking servers.."
