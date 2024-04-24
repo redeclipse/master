@@ -7,7 +7,8 @@ case "$1" in
     while true; do
       git pull && git submodule foreach 'git pull'
       rm -vf "../bins.tar.gz"
-      curl -o "../bins.tar.gz" "https://raw.githubusercontent.com/redeclipse/deploy/master/master/linux.tar.gz" && tar -zxvf "../bins.tar.gz"
+      curl --connect-timeout 30 -L -k -f -o "../bins.tar.gz" "https://raw.githubusercontent.com/redeclipse/deploy/master/master/linux.tar.gz" && tar -zxvf "../bins.tar.gz"
+      curl --connect-timeout 30 -L -k -f -o "${HOME}/.${i}.txt" "https://raw.githubusercontent.com/redeclipse/deploy/master/master/bins.txt"
       REDECLIPSE_HOME="${HOME}/master/${1}" REDECLIPSE_BINARY=redeclipse_server ./redeclipse.sh -sg0 -g 2>&1 | tee --append "${HOME}/logs/server-${1}.log"
       sleep 10
     done
