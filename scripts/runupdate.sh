@@ -27,7 +27,7 @@ cd "${HOME}" 2>&1 >/dev/null
 echo "checking servers.."
 for i in ${RE_RUN_SERVERS}; do
   echo "${i}: checking.."
-  RE_CUR_VER=`cat "${HOME}/.${i}.txt"`
+  RE_CUR_VER=`cat "${HOME}/${i}.txt"`
   RE_RUN_VER=`curl --connect-timeout 30 -L -k -f "https://raw.githubusercontent.com/redeclipse/deploy/master/master/bins.txt"`
   echo "${i}: ${RE_CUR_VER} -> ${RE_RUN_VER}"
   if [ -n "${RE_RUN_VER}" ] && [ "${RE_CUR_VER}" != "${RE_RUN_VER}" ]; then
