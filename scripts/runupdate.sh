@@ -33,6 +33,8 @@ for i in ${RE_RUN_SERVERS}; do
     echo "${i}: ${RE_CUR_VER} -> ${RE_RUN_VER}"
     if [ -n "${RE_RUN_VER}" ] && [ "${RE_CUR_VER}" != "${RE_RUN_VER}" ]; then
         git submodule foreach 'git pull'
+        make -C src clean-server
+        make PLATFORM_BUILD="$(date '+%s')" PLATFORM_BRANCH="master" PLATFORM_REVISION="${RE_RUN_VER}" WANT_DISCORD=1 WANT_STEAM=1 -j4 -C src server
         RE_PID=`pgrep -f "redeclipse-${i}"`
         if [ -n "${RE_PID}" ]; then
             echo "${i}: sending TERM to ${RE_PID}"

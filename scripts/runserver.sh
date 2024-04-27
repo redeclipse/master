@@ -5,7 +5,7 @@ case "$1" in
   official|dev)
     cd "${HOME}/redeclipse-${1}"
     while true; do
-      make -j4 -C src clean-server install-server
+      make -C src install-server
       REDECLIPSE_HOME="${HOME}/master/${1}" REDECLIPSE_BINARY=redeclipse_server ./redeclipse.sh -sg0 -g 2>&1 | tee --append "${HOME}/logs/server-${1}.log"
       sleep 5
     done
