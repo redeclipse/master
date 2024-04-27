@@ -1,10 +1,11 @@
-#!/bin/bash
+#!/bin/sh
 date -u
 
 echo "updating home.."
-pushd "${HOME}/master"
+cd "${HOME}/master"
 git pull
-popd
+
+cd "${HOME}"
 
 echo "running screens.."
 screen -S redeclipse -t 0 -A -d -m

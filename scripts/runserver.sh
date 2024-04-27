@@ -1,15 +1,15 @@
-#!/bin/bash
+#!/bin/sh
 date -u
 echo "running server: $1"
 case "$1" in
   official|dev)
-    pushd "${HOME}/redeclipse-${1}"
+    cd "${HOME}/redeclipse-${1}"
     while true; do
       make -j4 -C src clean-server install-server
       REDECLIPSE_HOME="${HOME}/master/${1}" REDECLIPSE_BINARY=redeclipse_server ./redeclipse.sh -sg0 -g 2>&1 | tee --append "${HOME}/logs/server-${1}.log"
       sleep 5
     done
-    popd
+    cd "${HOME}"
     ;;
   rehash)
     for i in official dev; do

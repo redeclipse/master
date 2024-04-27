@@ -1,14 +1,14 @@
-#!/bin/bash
+#!/bin/sh
 date -u
 RE_RUN_SERVERS="official"
 RE_RUN_CURHOUR=`date "+%M"`
 
-pushd "/webspace/redeclipse.net"
+cd "/webspace/redeclipse.net"
 git pull
-popd
+cd "${HOME}"
 
 
-pushd "${HOME}/master"
+cd "${HOME}/master"
 RE_CUR_HOME=`git rev-parse HEAD`
 git pull
 RE_RUN_HOME=`git rev-parse HEAD`
@@ -22,11 +22,11 @@ if [ "${RE_CUR_HOME}" != "${RE_RUN_HOME}" ]; then
         fi
     done
 fi
-popd
+cd "${HOME}"
 
 for i in ${RE_RUN_SERVERS}; do
     echo "${i}: checking.."
-    pushd "${HOME}/redeclipse-${i}"
+    cd "${HOME}/redeclipse-${i}"
     RE_CUR_VER=`git rev-parse HEAD`
     git pull
     RE_RUN_VER=`git rev-parse HEAD`
@@ -39,7 +39,7 @@ for i in ${RE_RUN_SERVERS}; do
             kill -s TERM ${RE_PID}
         fi
     fi
-    popd
+    cd "${HOME}"
 done
 
 echo "-"
