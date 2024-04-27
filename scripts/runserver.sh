@@ -1,17 +1,15 @@
-#!/bin/sh
+#!/bin/bash
 date -u
 echo "running server: $1"
 case "$1" in
   official|dev)
-    cd "${HOME}/redeclipse-${1}"
+    pushd "${HOME}/redeclipse-${1}"
     while true; do
-      git pull && git submodule foreach 'git pull'
-      rm -vf "../bins.tar.gz"
-      curl --connect-timeout 30 -L -k -f -o "../bins.tar.gz" "https://raw.githubusercontent.com/redeclipse/deploy/master/master/linux.tar.gz" && tar -zxvf "../bins.tar.gz"
-      curl --connect-timeout 30 -L -k -f -o "../${i}.txt" "https://raw.githubusercontent.com/redeclipse/deploy/master/master/bins.txt"
+      make -j4 -C src clean-server install-server
       REDECLIPSE_HOME="${HOME}/master/${1}" REDECLIPSE_BINARY=redeclipse_server ./redeclipse.sh -sg0 -g 2>&1 | tee --append "${HOME}/logs/server-${1}.log"
-      sleep 10
+      sleep 5
     done
+    popd
     ;;
   rehash)
     for i in official dev; do
@@ -21,4 +19,3 @@ case "$1" in
     ;;
 esac
 echo "done."
-cd "${HOME}"
