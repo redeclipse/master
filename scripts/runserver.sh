@@ -4,8 +4,7 @@ echo "running server: $1"
 case "$1" in
   official)
     cd "${HOME}/redeclipse-${1}"
-    git pull
-    git submodule foreach 'git pull'
+    git pull --recurse-submodules
     RE_RUN_VER=`git rev-parse HEAD`
     make -C src clean-server
     make PLATFORM_BUILD="$(date '+%s')" PLATFORM_BRANCH="master" PLATFORM_REVISION="${RE_RUN_VER}" WANT_DISCORD=0 WANT_STEAM=0 -j4 -C src server
