@@ -2,7 +2,7 @@
 date -u
 echo "running server: $1"
 case "$1" in
-  official|dev)
+  official)
     cd "${HOME}/redeclipse-${1}"
     git pull
     git submodule foreach 'git pull'
@@ -17,7 +17,7 @@ case "$1" in
     cd "${HOME}"
     ;;
   rehash)
-    for i in official dev; do
+    for i in official; do
         j=`pgrep -f "redeclipse-${i}"`
         if [ -n "${j}" ]; then kill -s HUP ${j}; fi
     done
