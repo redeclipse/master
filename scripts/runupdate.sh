@@ -3,11 +3,6 @@ date -u
 RE_RUN_SERVERS="official"
 RE_RUN_CURHOUR=`date "+%M"`
 
-cd "/webspace/redeclipse.net"
-git pull
-cd "${HOME}"
-
-
 cd "${HOME}/master"
 RE_CUR_HOME=`git rev-parse HEAD`
 git pull
