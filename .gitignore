@@ -1,5 +1,6 @@
 */auth.cfg
 */authserv.cfg
+*/*.dat
 *.sqlite
 *.sql
 *.bak
