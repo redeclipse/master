@@ -1,5 +1,10 @@
 */auth.cfg
+*/authuser.cfg
 */authserv.cfg
+*/servctrl.cfg
+*/secrets.cfg
+*/*.cfg.*
+*/*.new
 */*.dat
 *.sqlite
 *.sql
