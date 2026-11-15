@@ -6,7 +6,7 @@ You can access this repository by doing a checkout. If you don't want to do a gi
 
 There is currently one server run at the moment, *official*. Servers each have a directory in this repository for their home folder, which contains their respective `servinit.cfg`.
 
-The global trusts, bans and other lists, and the accounts, are no longer kept here. The master server loads and saves them itself, in files on the server that aren't shared: `authuser.cfg` (player accounts), `authserv.cfg` (server accounts) and `servctrl.cfg` (the global lists). Administrators change them while signed in on the website's account page, or through the master's Web API (see `doc/web-api-guide.md` in the base repository). Each save keeps the previous file as `.bak` and a dated copy a day for 14 days.
+The global trusts, bans and other lists, and the accounts, are no longer kept here. The master server loads and saves them itself, in files on the server that aren't shared: `authuser.cfg` (player accounts), `authserv.cfg` (server accounts) and `servctrl.cfg` (the global lists). Administrators change them while signed in on the website's account page, or through the master's Web API (see the [Web API Guide](https://www.redeclipse.net/docs/Web-API-Guide)). Each save keeps the previous file as `.bak` and a dated copy a day for 14 days.
 
 Secrets the master needs, which must never be committed, go in `official/secrets.cfg` on the server:
 
