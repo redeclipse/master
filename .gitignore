@@ -3,6 +3,7 @@
 */authserv.cfg
 */servctrl.cfg
 */secrets.cfg
+*/shield.cfg
 */*.cfg.*
 */*.new
 */*.dat
