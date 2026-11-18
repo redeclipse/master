@@ -38,3 +38,6 @@ Should you accidentally break out of the infinite loop, you can press `UP` to br
 
 ## runupdate.sh
 This file is responsible for updating this repository on the server and telling the servers to reload their configuration, then updates the web space (for [https://www.redeclipse.net](https://www.redeclipse.net)). It also checks if the server is responding, and kills (`SIGKILL`) if it doesn't. The script then goes on to check if there is a binary update to perform, then signals to terminate when the server is next empty (`SIGTERM`).
+
+## runrotate.sh
+This file keeps the logs in `logs/` short. Every 30 minutes it cuts each `.log` file to its last 9999 lines, in place, as the servers keep their logs open. The lines it cuts are added to `logs/archive/<name>-YYYYMMDD.log.gz`, one file a day for each log, so they can be looked through after an incident with `zcat` or `zgrep`. Archives older than 90 days are removed.
